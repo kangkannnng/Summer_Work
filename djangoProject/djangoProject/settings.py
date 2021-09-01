@@ -59,7 +59,7 @@ CORS_ALLOW_METHODS = '*'
 CORS_ALLOW_HEADERS = '*'
 # 凡是出现在白名单中的域名，都可以访问后端接口
 CORS_ORIGIN_WHITELIST = (
-    'http://127.0.0.1:8080',
+    'http://127.0.0.1:8000',
 )
 
 APPEND_SLASH = False
@@ -69,7 +69,8 @@ ROOT_URLCONF = 'djangoProject.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': [os.path.join(BASE_DIR, 'templates'),
+                 os.path.join(BASE_DIR,'dist')], # 加上这条，其余的是默认配置
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -129,8 +130,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "frontend"),
+    os.path.join(BASE_DIR, 'static'),  # 项目默认会有的路径，如果你部署的不仅是前端打包的静态文件，项目目录static文件下还有其他文件，最好不要删
+    os.path.join(BASE_DIR, "dist/static"),  # 加上这条
 ]
-
